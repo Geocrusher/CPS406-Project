@@ -1,2 +1,8 @@
 # CPS406-Project
-PROJECT!
+Will be using these components:
+
+Eclipse
+Eclise WindowBuilder
+Java 9
+
+Please update according to these requirements.
