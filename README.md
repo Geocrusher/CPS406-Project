@@ -2,7 +2,11 @@
 Will be using these components:
 
 Eclipse
-Eclise WindowBuilder
+
+Eclipse WindowBuilder
+
 Java 9
 
 Please update according to these requirements.
+
+I highly recommending downloading the git integration for Eclipse.
