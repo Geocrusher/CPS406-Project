@@ -16,10 +16,18 @@ import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.border.TitledBorder;
+import javax.swing.JTextField;
+import javax.swing.JTable;
 
 public class AccountantUI {
 
 	private JFrame accountantFrame;
+	private JTextField debtAmount;
+	private JTable coachScheduleTable;
 
 	/**
 	 * Launch the application.
@@ -50,7 +58,7 @@ public class AccountantUI {
 	private void initialize() {
 		accountantFrame = new JFrame();
 		accountantFrame.setTitle("Accountant Manager");
-		accountantFrame.setBounds(100, 100, 450, 308);
+		accountantFrame.setBounds(100, 100, 822, 620);
 		accountantFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		accountantFrame.getContentPane().setLayout(new CardLayout(0, 0));
 		
@@ -58,55 +66,141 @@ public class AccountantUI {
 		accountantFrame.getContentPane().add(tabbedPane, "name_12110013203647");
 		
 		JPanel manageFinance = new JPanel();
+		manageFinance.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		tabbedPane.addTab("Manage Finances", null, manageFinance, null);
 		manageFinance.setLayout(null);
 		
-		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane_1.setBounds(10, 11, 409, 221);
-		manageFinance.add(tabbedPane_1);
+		JPanel incomePanel = new JPanel();
+		incomePanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Income", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		incomePanel.setBounds(10, 11, 409, 301);
+		manageFinance.add(incomePanel);
+		incomePanel.setLayout(null);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setLayout(null);
-		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		tabbedPane_1.addTab("Statements", null, panel_2, null);
+		JScrollPane revenueView = new JScrollPane();
+		revenueView.setBounds(10, 51, 389, 102);
+		incomePanel.add(revenueView);
 		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(10, 38, 384, 144);
-		panel_2.add(scrollPane_2);
+		JTextArea revenueText = new JTextArea();
+		revenueView.setViewportView(revenueText);
 		
-		JTextArea textArea = new JTextArea();
-		scrollPane_2.setViewportView(textArea);
+		JComboBox incomeMonth = new JComboBox();
+		incomeMonth.setBounds(286, 11, 113, 18);
+		incomePanel.add(incomeMonth);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(264, 11, 130, 20);
-		panel_2.add(comboBox_1);
+		JLabel lblIncomeMonth = new JLabel("Month:");
+		lblIncomeMonth.setBounds(238, 13, 38, 14);
+		incomePanel.add(lblIncomeMonth);
 		
-		JLabel label_1 = new JLabel("Statements:");
-		label_1.setBounds(195, 14, 59, 14);
-		panel_2.add(label_1);
+		JScrollPane expenseView = new JScrollPane();
+		expenseView.setBounds(10, 184, 389, 102);
+		incomePanel.add(expenseView);
 		
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		tabbedPane_1.addTab("Unpaid Debt", null, panel, null);
+		JTextArea expenseText = new JTextArea();
+		expenseView.setViewportView(expenseText);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 38, 389, 144);
-		panel.add(scrollPane_1);
+		JLabel lblRevenue = new JLabel("Revenue");
+		lblRevenue.setBounds(10, 32, 46, 14);
+		incomePanel.add(lblRevenue);
 		
-		JTextArea textArea_1 = new JTextArea();
-		scrollPane_1.setViewportView(textArea_1);
+		JLabel lblExpense = new JLabel("Expenses");
+		lblExpense.setBounds(10, 164, 46, 14);
+		incomePanel.add(lblExpense);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(206, 11, 193, 20);
-		panel.add(comboBox);
+		JPanel debtPanel = new JPanel();
+		debtPanel.setLayout(null);
+		debtPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Debt", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		debtPanel.setBounds(10, 323, 409, 220);
+		manageFinance.add(debtPanel);
 		
-		JLabel lblLogMonth = new JLabel("View Logs:");
-		lblLogMonth.setBounds(145, 14, 51, 14);
-		panel.add(lblLogMonth);
+		JScrollPane debtView = new JScrollPane();
+		debtView.setBounds(10, 34, 389, 108);
+		debtPanel.add(debtView);
+		
+		JTextArea debtText = new JTextArea();
+		debtView.setViewportView(debtText);
+		
+		JComboBox debtMonth = new JComboBox();
+		debtMonth.setBounds(286, 11, 113, 18);
+		debtPanel.add(debtMonth);
+		
+		JLabel lblDebtMonth = new JLabel("Month:");
+		lblDebtMonth.setBounds(238, 13, 38, 14);
+		debtPanel.add(lblDebtMonth);
+		
+		JButton debtSubmit = new JButton("Submit");
+		debtSubmit.setBounds(310, 158, 89, 23);
+		debtPanel.add(debtSubmit);
+		
+		JButton debtCancel = new JButton("Cancel");
+		debtCancel.setBounds(310, 183, 89, 23);
+		debtPanel.add(debtCancel);
+		
+		JLabel lblExpenseType = new JLabel("Expense:");
+		lblExpenseType.setBounds(10, 162, 46, 14);
+		debtPanel.add(lblExpenseType);
+		
+		JLabel lblDebtAmount = new JLabel("Amount:");
+		lblDebtAmount.setBounds(165, 162, 46, 14);
+		debtPanel.add(lblDebtAmount);
+		
+		JLabel lblDebtDue = new JLabel("Month:");
+		lblDebtDue.setBounds(10, 187, 46, 14);
+		debtPanel.add(lblDebtDue);
+		
+		JComboBox debtExpenseType = new JComboBox();
+		debtExpenseType.setBounds(66, 158, 89, 22);
+		debtPanel.add(debtExpenseType);
+		
+		debtAmount = new JTextField();
+		debtAmount.setBounds(208, 159, 86, 20);
+		debtPanel.add(debtAmount);
+		debtAmount.setColumns(10);
+		
+		JComboBox debtDue = new JComboBox();
+		debtDue.setBounds(66, 183, 89, 22);
+		debtPanel.add(debtDue);
+		
+		JPanel profitPanel = new JPanel();
+		profitPanel.setBorder(new TitledBorder(null, "Profit", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		profitPanel.setBounds(429, 11, 362, 301);
+		manageFinance.add(profitPanel);
+		profitPanel.setLayout(null);
+		
+		JComboBox profitYear = new JComboBox();
+		profitYear.setBounds(239, 11, 113, 18);
+		profitPanel.add(profitYear);
+		
+		JLabel lblProfitYear = new JLabel("Year:");
+		lblProfitYear.setBounds(191, 13, 38, 14);
+		profitPanel.add(lblProfitYear);
+		
+		JScrollPane profitView = new JScrollPane();
+		profitView.setBounds(10, 50, 342, 240);
+		profitPanel.add(profitView);
+		
+		JTextArea profitText = new JTextArea();
+		profitView.setViewportView(profitText);
 		
 		JPanel manageCoach = new JPanel();
 		tabbedPane.addTab("Manage Coach", null, manageCoach, null);
 		manageCoach.setLayout(null);
+		
+		JScrollPane coachScheduleView = new JScrollPane();
+		coachScheduleView.setBounds(10, 11, 781, 428);
+		manageCoach.add(coachScheduleView);
+		
+		coachScheduleTable = new JTable();
+		coachScheduleView.setViewportView(coachScheduleTable);
+		
+		JPanel coachControls = new JPanel();
+		coachControls.setBorder(new TitledBorder(null, "Controls", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		coachControls.setBounds(10, 450, 781, 92);
+		manageCoach.add(coachControls);
+		
+		JButton coachSubmit = new JButton(" Submit Changes");
+		coachControls.add(coachSubmit);
+		
+		JButton coachCancel = new JButton("Cancel Changes");
+		coachControls.add(coachCancel);
 	}
 }
