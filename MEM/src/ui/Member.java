@@ -117,8 +117,7 @@ public class Member implements Comparable<Member> {
 		return consecDiscount;
 	}
 	
-	//payment status, attendance TODDO
-  
+	//payment status, attendance
 	public int compareTo(Member other) {
 		if ((getLastName() == other.getLastName())){
 			return (getFirstName().compareTo(other.getFirstName()));
