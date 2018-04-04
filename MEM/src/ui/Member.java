@@ -3,26 +3,26 @@ import java.util.*;
 public class Member implements Comparable<Member> {
 
 	private String userName;
+	private String password;
 	private String lastName;
 	private String firstName;
 	private String telephone;
 	private String email;
-	private String password;
-	private int balance;
 	private String permission;
+	private int balance;
 	private int paid;
 	private int notPaid;
 	private int consecDiscount;
 
-	public Member(String userN, String lN, String fN, String tele, String email, String pass, int bal, String perm, int paid, int notPaid, int consec) {
+	public Member(String userN, String pass, String lN, String fN, String tele, String email, String perm, int bal, int paid, int notPaid, int consec) {
 		setUserName(userN);
+		setPassword(pass);
 		setLastName(lN);
 		setFirstName(fN);
 		setTelephone(tele);
 		setEmail(email);
-		setPassword(pass);
-		setBalance(bal);
 		setPermission(perm);
+		setBalance(bal);
 		setPaid(paid);
 		setNotPaid(notPaid);
 		setConsecDiscount(consec);
@@ -54,6 +54,14 @@ public class Member implements Comparable<Member> {
 	
 	public void setBalance(int bal) {
 		balance = bal;
+	}
+	
+	public void addBalance(int bal) {
+		balance += bal;
+	}
+	
+	public void payBalance(int bal) {
+		balance -= bal;
 	}
 	
 	public void setPermission(String perm) {
