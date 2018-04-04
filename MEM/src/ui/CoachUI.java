@@ -65,7 +65,7 @@ public class CoachUI {
 		mainViewer.setLayout(null);
 		
 		JScrollPane tableViewer = new JScrollPane();
-		tableViewer.setBounds(276, 11, 607, 609);
+		tableViewer.setBounds(330, 11, 553, 609);
 		mainViewer.add(tableViewer);
 		
 		table = new JTable();
@@ -73,23 +73,23 @@ public class CoachUI {
 		
 		JPanel sendMessages = new JPanel();
 		sendMessages.setBorder(new TitledBorder(null, "Send Messages", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		sendMessages.setBounds(10, 416, 256, 204);
+		sendMessages.setBounds(10, 416, 310, 204);
 		mainViewer.add(sendMessages);
 		sendMessages.setLayout(null);
 		
 		JScrollPane messagePane = new JScrollPane();
-		messagePane.setBounds(10, 50, 236, 106);
+		messagePane.setBounds(10, 50, 290, 106);
 		sendMessages.add(messagePane);
 		
 		JTextArea messageText = new JTextArea();
 		messagePane.setViewportView(messageText);
 		
 		JLabel lblRecipient = new JLabel("Recipient:");
-		lblRecipient.setBounds(88, 25, 56, 14);
+		lblRecipient.setBounds(88, 25, 74, 14);
 		sendMessages.add(lblRecipient);
 		
 		recipientText = new JTextField();
-		recipientText.setBounds(147, 22, 99, 20);
+		recipientText.setBounds(172, 22, 128, 20);
 		sendMessages.add(recipientText);
 		recipientText.setColumns(10);
 		
@@ -103,66 +103,66 @@ public class CoachUI {
 		
 		JPanel tableControls = new JPanel();
 		tableControls.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Controls", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		tableControls.setBounds(10, 12, 256, 394);
+		tableControls.setBounds(10, 12, 310, 394);
 		mainViewer.add(tableControls);
 		tableControls.setLayout(null);
 		
 		JPanel addRemove = new JPanel();
 		addRemove.setBorder(new TitledBorder(null, "Add/Remove", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		addRemove.setBounds(10, 148, 236, 235);
+		addRemove.setBounds(10, 148, 290, 235);
 		tableControls.add(addRemove);
 		addRemove.setLayout(null);
 		
 		JLabel lblFirstName = new JLabel("First Name:");
-		lblFirstName.setBounds(10, 31, 62, 14);
+		lblFirstName.setBounds(10, 31, 97, 14);
 		addRemove.add(lblFirstName);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
-		lblLastName.setBounds(10, 68, 62, 14);
+		lblLastName.setBounds(10, 68, 97, 14);
 		addRemove.add(lblLastName);
 		
 		JLabel lblPhone = new JLabel("Phone:");
-		lblPhone.setBounds(10, 105, 46, 14);
+		lblPhone.setBounds(10, 105, 97, 14);
 		addRemove.add(lblPhone);
 		
 		JLabel lblAddress = new JLabel("Address:");
-		lblAddress.setBounds(10, 142, 46, 14);
+		lblAddress.setBounds(10, 142, 97, 14);
 		addRemove.add(lblAddress);
 		
 		txtFirst = new JTextField();
-		txtFirst.setBounds(82, 28, 144, 20);
+		txtFirst.setBounds(117, 28, 163, 20);
 		addRemove.add(txtFirst);
 		txtFirst.setColumns(10);
 		
 		txtLast = new JTextField();
 		txtLast.setColumns(10);
-		txtLast.setBounds(82, 65, 144, 20);
+		txtLast.setBounds(117, 65, 163, 20);
 		addRemove.add(txtLast);
 		
 		txtPhone = new JTextField();
 		txtPhone.setColumns(10);
-		txtPhone.setBounds(82, 102, 144, 20);
+		txtPhone.setBounds(117, 102, 163, 20);
 		addRemove.add(txtPhone);
 		
 		txtAddress = new JTextField();
 		txtAddress.setColumns(10);
-		txtAddress.setBounds(82, 139, 144, 20);
+		txtAddress.setBounds(117, 139, 163, 20);
 		addRemove.add(txtAddress);
 		
 		JButton btnAddMem = new JButton("Add");
-		btnAddMem.setBounds(10, 170, 102, 23);
+		btnAddMem.setBounds(10, 170, 130, 23);
 		addRemove.add(btnAddMem);
 		
 		JButton btnRemoveMem = new JButton("Remove");
-		btnRemoveMem.setBounds(122, 170, 104, 23);
+		btnRemoveMem.setBounds(150, 170, 130, 23);
 		addRemove.add(btnRemoveMem);
 		
 		JButton btnCancelMem = new JButton("Cancel");
-		btnCancelMem.setBounds(10, 201, 216, 23);
+		btnCancelMem.setBounds(10, 201, 270, 23);
 		addRemove.add(btnCancelMem);
 		
 		JButton btnSortFreq = new JButton("Sort via Frequency");
-		btnSortFreq.setBounds(10, 26, 236, 41);
+		btnSortFreq.setBounds(10, 26, 290, 41);
 		tableControls.add(btnSortFreq);
 		
 		JButton btnSortPay = new JButton("Sort via Payment");
@@ -170,7 +170,7 @@ public class CoachUI {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnSortPay.setBounds(10, 91, 236, 41);
+		btnSortPay.setBounds(10, 91, 290, 41);
 		tableControls.add(btnSortPay);
 	}
 }
