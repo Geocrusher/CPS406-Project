@@ -17,6 +17,8 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
 
 public class CoachUI {
 
@@ -57,16 +59,32 @@ public class CoachUI {
 	private void initialize() {
 		frmCoachManagement = new JFrame();
 		frmCoachManagement.setTitle("Coach Manager");
-		frmCoachManagement.setBounds(100, 100, 909, 667);
+		frmCoachManagement.setBounds(100, 100, 909, 692);
 		frmCoachManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel mainViewer = new JPanel();
-		frmCoachManagement.getContentPane().add(mainViewer, BorderLayout.CENTER);
-		mainViewer.setLayout(null);
+		JToolBar toolBar = new JToolBar();
+		frmCoachManagement.getContentPane().add(toolBar, BorderLayout.NORTH);
+		
+		JButton btnNewButton = new JButton("Shutdown");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		JButton btnShutdown = new JButton("Logout");
+		toolBar.add(btnShutdown);
+		toolBar.add(btnNewButton);
+		
+		JTabbedPane coachTabs = new JTabbedPane(JTabbedPane.TOP);
+		frmCoachManagement.getContentPane().add(coachTabs, BorderLayout.CENTER);
+		
+		JPanel coachMain = new JPanel();
+		coachTabs.addTab("Main", null, coachMain, null);
+		coachMain.setLayout(null);
 		
 		JScrollPane tableViewer = new JScrollPane();
 		tableViewer.setBounds(330, 11, 553, 609);
-		mainViewer.add(tableViewer);
+		coachMain.add(tableViewer);
 		
 		table = new JTable();
 		tableViewer.setViewportView(table);
@@ -74,7 +92,7 @@ public class CoachUI {
 		JPanel sendMessages = new JPanel();
 		sendMessages.setBorder(new TitledBorder(null, "Send Messages", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		sendMessages.setBounds(10, 416, 310, 204);
-		mainViewer.add(sendMessages);
+		coachMain.add(sendMessages);
 		sendMessages.setLayout(null);
 		
 		JScrollPane messagePane = new JScrollPane();
@@ -104,7 +122,7 @@ public class CoachUI {
 		JPanel tableControls = new JPanel();
 		tableControls.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Controls", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		tableControls.setBounds(10, 12, 310, 394);
-		mainViewer.add(tableControls);
+		coachMain.add(tableControls);
 		tableControls.setLayout(null);
 		
 		JPanel addRemove = new JPanel();
@@ -172,5 +190,15 @@ public class CoachUI {
 		});
 		btnSortPay.setBounds(10, 91, 290, 41);
 		tableControls.add(btnSortPay);
+		
+		JPanel coachInbox = new JPanel();
+		coachTabs.addTab("Inbox", null, coachInbox, null);
+		coachInbox.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane coachInboxViewer = new JScrollPane();
+		coachInbox.add(coachInboxViewer, BorderLayout.CENTER);
+		
+		JTextArea coachInboxText = new JTextArea();
+		coachInboxViewer.setViewportView(coachInboxText);
 	}
 }

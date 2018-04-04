@@ -3,6 +3,9 @@ package ui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
 
 public class MemberUI {
 
@@ -36,8 +39,17 @@ public class MemberUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 700, 565);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JTabbedPane memTabs = new JTabbedPane(JTabbedPane.TOP);
+		frame.getContentPane().add(memTabs, BorderLayout.CENTER);
+		
+		JPanel memMain = new JPanel();
+		memTabs.addTab("Main", null, memMain, null);
+		
+		JPanel memInbox = new JPanel();
+		memTabs.addTab("Inbox", null, memInbox, null);
 	}
 
 }
