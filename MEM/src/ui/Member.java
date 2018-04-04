@@ -3,29 +3,31 @@ import java.util.*;
 public class Member implements Comparable<Member> {
 
 	private String userName;
+	private String password;
 	private String lastName;
 	private String firstName;
 	private String telephone;
 	private String email;
-	private String password;
-	private int balance;
 	private String permission;
-	private int paid;
-	private int notPaid;
+	private int balance;
+	private Integer paid;
+	private Integer notPaid;
 	private int consecDiscount;
+	private Integer attendance;
 
-	public Member(String userN, String lN, String fN, String tele, String email, String pass, int bal, String perm, int paid, int notPaid, int consec) {
+	public Member(String userN, String pass, String lN, String fN, String tele, String email, String perm, int bal, Integer paid, Integer notPaid, int consec, Integer attend) {
 		setUserName(userN);
+		setPassword(pass);
 		setLastName(lN);
 		setFirstName(fN);
 		setTelephone(tele);
 		setEmail(email);
-		setPassword(pass);
-		setBalance(bal);
 		setPermission(perm);
+		setBalance(bal);
 		setPaid(paid);
 		setNotPaid(notPaid);
 		setConsecDiscount(consec);
+		setAttendance(attend);
 	}
 	
 	public void setUserName(String userN) {
@@ -56,15 +58,23 @@ public class Member implements Comparable<Member> {
 		balance = bal;
 	}
 	
+	public void addBalance(int bal) {
+		balance += bal;
+	}
+	
+	public void payBalance(int bal) {
+		balance -= bal;
+	}
+	
 	public void setPermission(String perm) {
 		permission = perm;
 	}
 	
-	public void setPaid(int pay) {
+	public void setPaid(Integer pay) {
 		paid = pay;
 	}
 	
-	public void setNotPaid(int nPay) {
+	public void setNotPaid(Integer nPay) {
 		notPaid = nPay;
 	}
 	
@@ -72,6 +82,13 @@ public class Member implements Comparable<Member> {
 		consecDiscount = consec;
 	}
 	
+	public void setAttendance(Integer attend) {
+		attendance = attend;
+	}
+	
+	public void cameToClass(int numclass) {
+		attendance += numclass;
+	}
 	
 	public String getUserName() {
 		return userName;
@@ -105,19 +122,24 @@ public class Member implements Comparable<Member> {
 		return permission;
 	}
 	
-	public int getPaid() {
+	public Integer getPaid() {
 		return paid;
 	}
 	
-	public int getNotPaid() {
+	public Integer getNotPaid() {
 		return notPaid;
 	}
 	
 	public int getConsecDiscount() {
 		return consecDiscount;
 	}
+	public Integer getAttendance() {
+		return attendance;
+	}
+	
 	
 	//payment status, attendance
+	
 	public int compareTo(Member other) {
 		if ((getLastName() == other.getLastName())){
 			return (getFirstName().compareTo(other.getFirstName()));
@@ -126,15 +148,21 @@ public class Member implements Comparable<Member> {
 		}
 	}
 
-	class compEmail implements Comparator<Member>{
-		public int compare(Member firstPer, Member secondPer) {
-			return firstPer.getEmail().compareTo(secondPer.getEmail());
+	class compPaid implements Comparator<Member>{
+		public int compare(Member firstMem, Member secondMem) {
+			return firstMem.getPaid().compareTo(secondMem.getPaid());
 		}
 	}
 
-	class compTele implements Comparator<Member>{
-		public int compare(Member firstPer, Member secondPer){
-			return (firstPer.getTelephone().compareTo(secondPer.getTelephone()));
+	class compNotPaid implements Comparator<Member>{
+		public int compare(Member firstMem, Member secondMem){
+			return (firstMem.getNotPaid().compareTo(secondMem.getNotPaid()));
+		}
+	}
+	
+	class compAttendance implements Comparator<Member>{
+		public int compare(Member firstMem, Member secondMem){
+			return (firstMem.getAttendance().compareTo(secondMem.getAttendance()));
 		}
 	}
 }
