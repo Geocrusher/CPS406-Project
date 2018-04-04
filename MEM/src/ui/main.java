@@ -5,7 +5,7 @@ public class main {
 	ArrayList<Member> membersList = new ArrayList<Member>();
 			
 	public void addMem(String userName, String password,  String lastName, String firstName, String tele, String email, String perm){
-		Member member = new Member(userName, password, lastName, firstName, tele, email, perm, 0, 0, 0, 0);
+		Member member = new Member(userName, password, lastName, firstName, tele, email, perm, 0, 0, 0, 0, 0);
 		membersList.add(member);
 	}
 	
@@ -40,6 +40,10 @@ public class main {
 	
 	public void payBal(Member mem, int bal){
 		mem.payBalance(bal);
+	}
+	
+	public void attended(Member mem, int numclass){
+		mem.cameToClass(numclass);
 	}
 	
 }
