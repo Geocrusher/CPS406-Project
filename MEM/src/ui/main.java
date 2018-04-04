@@ -46,4 +46,12 @@ public class main {
 		mem.cameToClass(numclass);
 	}
 	
+	public String viewMem(){
+		for (Member x: membersList){
+			return x.getFirstName() + " " + x.getLastName();
+		}
+		return null;
+	}
+	
+	
 }
