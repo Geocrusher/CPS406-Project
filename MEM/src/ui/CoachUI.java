@@ -205,6 +205,7 @@ public class CoachUI extends JFrame {
 		coachInbox.add(coachInboxViewer, BorderLayout.CENTER);
 		
 		JTextArea coachInboxText = new JTextArea();
+		coachInboxText.setEditable(false);
 		coachInboxViewer.setViewportView(coachInboxText);
 	}
 	class logoutListener implements ActionListener {

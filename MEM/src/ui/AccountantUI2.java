@@ -68,6 +68,10 @@ public class AccountantUI2 extends JFrame {
 		btnLogout.addActionListener(logoutListen);
 		
 		JButton btnShutdown = new JButton("Shutdown");
+		btnShutdown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		toolBar.add(btnShutdown);
 		
 		JTabbedPane accountTabs = new JTabbedPane(JTabbedPane.TOP);
@@ -218,6 +222,7 @@ public class AccountantUI2 extends JFrame {
 		accountInbox.add(accountInboxView, BorderLayout.CENTER);
 		
 		JTextArea accountInboxText = new JTextArea();
+		accountInboxText.setEditable(false);
 		accountInboxView.setViewportView(accountInboxText);
 	}
 	class logoutListener implements ActionListener {
