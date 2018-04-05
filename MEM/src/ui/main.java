@@ -68,6 +68,30 @@ public class main {
 		}
 		return null;
 	}
+		
+	public void sortAttendance(){
+		Collections.sort(membersList, new Comparator<Member>() {
+			public int compare(Member firstMem, Member secondMem){
+				return ((firstMem.getAttendance()).compareTo((secondMem.getAttendance())));
+			}
+		});
+	}
+	
+	public void sortPaid(){
+		Collections.sort(membersList, new Comparator<Member>() {
+			public int compare(Member firstMem, Member secondMem){
+				return firstMem.getPaid().compareTo(secondMem.getPaid());
+			}
+		});
+	}
+
+	public void sortNotPaid(){
+		Collections.sort(membersList, new Comparator<Member>() {
+			public int compare(Member firstMem, Member secondMem){
+				return (firstMem.getNotPaid().compareTo(secondMem.getNotPaid()));
+			}
+		});
+	}
 	
 	*/
 }
