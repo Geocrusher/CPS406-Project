@@ -14,6 +14,7 @@ public class Member/* implements Comparable<Member>*/ {
 	private Integer notPaid;
 	private int consecDiscount;
 	private int balance;
+	private ArrayList<String> classesAttended = new ArrayList<String>();
 
 	public Member(String userN, String pass, String lN, String fN, String tele, String email, String perm, int bal, Integer paid, Integer notPaid, int consec, Integer attend) {
 		setUserName(userN);
@@ -29,7 +30,7 @@ public class Member/* implements Comparable<Member>*/ {
 		setConsecDiscount(consec);
 		setAttendance(attend);
 	}
-	
+
 	public void setUserName(String userN) {
 		userName = userN;
 	}
@@ -86,9 +87,14 @@ public class Member/* implements Comparable<Member>*/ {
 		attendance = attend;
 	}
 	
-	public void cameToClass(int numclass) {
+	public void classCounter(int numclass) {
 		attendance += numclass;
 	}
+	
+	public void classAttendance(String theClass){
+		classesAttended.add(theClass);
+	}
+	
 	
 	public String getUserName() {
 		return userName;
@@ -133,10 +139,19 @@ public class Member/* implements Comparable<Member>*/ {
 	public int getConsecDiscount() {
 		return consecDiscount;
 	}
+	
 	public Integer getAttendance() {
 		return attendance;
 	}
 	
+	public boolean isComing(String theClass){
+		for(String x: classesAttended){
+			if(theClass.equals(x)){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	//payment status, attendance
 /*	
