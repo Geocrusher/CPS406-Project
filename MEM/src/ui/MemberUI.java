@@ -33,6 +33,7 @@ public class MemberUI extends JFrame{
 	 * Create the application.
 	 */
 	public MemberUI() {
+		setResizable(false);
 		initialize();
 	}
 

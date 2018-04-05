@@ -46,6 +46,7 @@ public class AccountantUI2 extends JFrame {
 	 * Create the application.
 	 */
 	public AccountantUI2() {
+		setResizable(false);
 		initialize();
 	}
 
@@ -54,10 +55,11 @@ public class AccountantUI2 extends JFrame {
 	 */
 	private void initialize() {
 		//frame = new JFrame();
-		this.setBounds(100, 100, 739, 527);
+		this.setBounds(100, 100, 739, 536);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JToolBar toolBar = new JToolBar();
+		toolBar.setFloatable(false);
 		this.getContentPane().add(toolBar, BorderLayout.NORTH);
 		
 		JButton btnLogout = new JButton("Logout");

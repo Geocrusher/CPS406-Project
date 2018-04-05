@@ -52,6 +52,7 @@ public class CoachUI extends JFrame {
 	 * Create the application.
 	 */
 	public CoachUI() {
+		setResizable(false);
 		initialize();
 	}
 
@@ -61,10 +62,11 @@ public class CoachUI extends JFrame {
 	private void initialize() {
 		//this = new JFrame();
 		this.setTitle("Coach Manager");
-		this.setBounds(100, 100, 909, 692);
+		this.setBounds(100, 100, 911, 727);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JToolBar toolBar = new JToolBar();
+		toolBar.setFloatable(false);
 		this.getContentPane().add(toolBar, BorderLayout.NORTH);
 		
 		JButton btnNewButton = new JButton("Shutdown");
