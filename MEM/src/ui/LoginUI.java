@@ -107,18 +107,18 @@ public class LoginUI extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			String uName = usrField.getText();
 			String pWord = String.valueOf(passField.getPassword());
-			if (pWord.equals("pass")) {
-				if (uName.equals("tLog")) {
+			if (pWord.equals(pass)) {
+				if (uName.equals(tLog)) {
 					JFrame acWindow = new AccountantUI2();
 					acWindow.setVisible(true);
 					setVisible(false);
 				}
-				if (uName.equals("cLog")) {
+				if (uName.equals(cLog)) {
 					JFrame coWindow = new CoachUI();
 					coWindow.setVisible(true);
 					setVisible(false);
 				}
-				if (uName.equals("mLog")) {
+				if (uName.equals(mLog)) {
 					JFrame meWindow = new MemberUI();
 					meWindow.setVisible(true);
 					setVisible(false);

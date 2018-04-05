@@ -7,6 +7,8 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class MemberUI extends JFrame{
 
@@ -53,6 +55,13 @@ public class MemberUI extends JFrame{
 		
 		JPanel memInbox = new JPanel();
 		memTabs.addTab("Inbox", null, memInbox, null);
+		memInbox.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane memInboxView = new JScrollPane();
+		memInbox.add(memInboxView, BorderLayout.CENTER);
+		
+		JTextArea memInboxText = new JTextArea();
+		memInboxView.setViewportView(memInboxText);
 	}
 
 }
