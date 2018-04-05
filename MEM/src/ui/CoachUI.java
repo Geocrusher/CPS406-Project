@@ -1,7 +1,8 @@
 package ui;
 
 import java.awt.EventQueue;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
@@ -20,9 +21,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
-public class CoachUI {
+public class CoachUI extends JFrame {
 
-	private JFrame frmCoachManagement;
+	//private JFrame this;
 	private JTable table;
 	private JTextField recipientText;
 	private JTextField txtFirst;
@@ -33,19 +34,20 @@ public class CoachUI {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					CoachUI window = new CoachUI();
-					window.frmCoachManagement.setVisible(true);
+					window.this.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
+	*/
 	/**
 	 * Create the application.
 	 */
@@ -57,13 +59,13 @@ public class CoachUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmCoachManagement = new JFrame();
-		frmCoachManagement.setTitle("Coach Manager");
-		frmCoachManagement.setBounds(100, 100, 909, 692);
-		frmCoachManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this = new JFrame();
+		this.setTitle("Coach Manager");
+		this.setBounds(100, 100, 909, 692);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JToolBar toolBar = new JToolBar();
-		frmCoachManagement.getContentPane().add(toolBar, BorderLayout.NORTH);
+		this.getContentPane().add(toolBar, BorderLayout.NORTH);
 		
 		JButton btnNewButton = new JButton("Shutdown");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -74,9 +76,11 @@ public class CoachUI {
 		JButton btnShutdown = new JButton("Logout");
 		toolBar.add(btnShutdown);
 		toolBar.add(btnNewButton);
+		ActionListener logoutListen = new logoutListener();
+		btnShutdown.addActionListener(logoutListen);
 		
 		JTabbedPane coachTabs = new JTabbedPane(JTabbedPane.TOP);
-		frmCoachManagement.getContentPane().add(coachTabs, BorderLayout.CENTER);
+		this.getContentPane().add(coachTabs, BorderLayout.CENTER);
 		
 		JPanel coachMain = new JPanel();
 		coachTabs.addTab("Main", null, coachMain, null);
@@ -200,5 +204,12 @@ public class CoachUI {
 		
 		JTextArea coachInboxText = new JTextArea();
 		coachInboxViewer.setViewportView(coachInboxText);
+	}
+	class logoutListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			JFrame loWindow = new LoginUI();
+			loWindow.setVisible(true);
+			setVisible(false);
+		}
 	}
 }

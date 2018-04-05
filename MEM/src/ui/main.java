@@ -1,7 +1,23 @@
+package ui;
 import java.util.*;
+import javax.swing.JFrame;
+import java.awt.EventQueue;
 
 public class main {
 	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JFrame window = new LoginUI();
+					window.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	/*
 	ArrayList<Member> membersList = new ArrayList<Member>();
 			
 	public void addMem(String userName, String password,  String lastName, String firstName, String tele, String email, String perm){
@@ -53,5 +69,5 @@ public class main {
 		return null;
 	}
 	
-	
+	*/
 }

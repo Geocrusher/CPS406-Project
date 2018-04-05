@@ -1,7 +1,8 @@
 package ui;
 
 import java.awt.EventQueue;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
 import java.awt.BorderLayout;
@@ -16,9 +17,10 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JTable;
 
-public class AccountantUI2 {
 
-	private JFrame frame;
+public class AccountantUI2 extends JFrame {
+
+	//private JFrame frame;
 	private JTextField expenseAmount;
 	private JTextField dueDate;
 	private JTable table;
@@ -26,6 +28,7 @@ public class AccountantUI2 {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -38,7 +41,7 @@ public class AccountantUI2 {
 			}
 		});
 	}
-
+	*/
 	/**
 	 * Create the application.
 	 */
@@ -50,21 +53,23 @@ public class AccountantUI2 {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 739, 527);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame = new JFrame();
+		this.setBounds(100, 100, 739, 527);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JToolBar toolBar = new JToolBar();
-		frame.getContentPane().add(toolBar, BorderLayout.NORTH);
+		this.getContentPane().add(toolBar, BorderLayout.NORTH);
 		
 		JButton btnLogout = new JButton("Logout");
 		toolBar.add(btnLogout);
+		ActionListener logoutListen = new logoutListener();
+		btnLogout.addActionListener(logoutListen);
 		
 		JButton btnShutdown = new JButton("Shutdown");
 		toolBar.add(btnShutdown);
 		
 		JTabbedPane accountTabs = new JTabbedPane(JTabbedPane.TOP);
-		frame.getContentPane().add(accountTabs, BorderLayout.CENTER);
+		this.getContentPane().add(accountTabs, BorderLayout.CENTER);
 		
 		JPanel financeTab = new JPanel();
 		accountTabs.addTab("Finances", null, financeTab, null);
@@ -212,5 +217,12 @@ public class AccountantUI2 {
 		
 		JTextArea accountInboxText = new JTextArea();
 		accountInboxView.setViewportView(accountInboxText);
+	}
+	class logoutListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			JFrame loWindow = new LoginUI();
+			loWindow.setVisible(true);
+			setVisible(false);
+		}
 	}
 }

@@ -1,32 +1,34 @@
 package ui;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MemberUI {
+public class MemberUI extends JFrame{
 
-	private JFrame frame;
+	//private Jthis this;
 
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					MemberUI window = new MemberUI();
-					window.frame.setVisible(true);
+					window.this.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
+	*/
 	/**
 	 * Create the application.
 	 */
@@ -35,15 +37,15 @@ public class MemberUI {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialize the contents of the this.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 700, 565);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this = new Jthis();
+		this.setBounds(100, 100, 700, 565);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JTabbedPane memTabs = new JTabbedPane(JTabbedPane.TOP);
-		frame.getContentPane().add(memTabs, BorderLayout.CENTER);
+		this.getContentPane().add(memTabs, BorderLayout.CENTER);
 		
 		JPanel memMain = new JPanel();
 		memTabs.addTab("Main", null, memMain, null);

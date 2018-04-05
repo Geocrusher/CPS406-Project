@@ -1,7 +1,8 @@
 package ui;
 
 import java.awt.EventQueue;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -18,15 +19,21 @@ import java.awt.Color;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.EtchedBorder;
 
-public class LoginUI {
+public class LoginUI extends JFrame{
 
-	private JFrame loginViewer;
+	//private JFrame loginViewer;
 	private JTextField usrField;
 	private JPasswordField passField;
+
+	private static final String tLog = "treasurer";
+	private static final String cLog = "coach";
+	private static final String mLog = "member";
+	private static final String pass = "password";
 
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,7 +46,7 @@ public class LoginUI {
 			}
 		});
 	}
-
+	*/
 	/**
 	 * Create the application.
 	 */
@@ -51,22 +58,26 @@ public class LoginUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		loginViewer = new JFrame();
-		loginViewer.setTitle("Membership Manager");
-		loginViewer.setBounds(100, 100, 261, 172);
-		loginViewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//loginViewer = new JFrame();
+		this.setTitle("Membership Manager");
+		this.setBounds(100, 100, 261, 172);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel loginMain = new JPanel();
-		loginViewer.getContentPane().add(loginMain, BorderLayout.CENTER);
+		this.getContentPane().add(loginMain, BorderLayout.CENTER);
 		loginMain.setLayout(null);
 		
 		JButton loginBtn = new JButton("Login");
 		loginBtn.setBounds(11, 102, 89, 23);
 		loginMain.add(loginBtn);
+		ActionListener loginListen = new loginListener();
+		loginBtn.addActionListener(loginListen);
 		
 		JButton cancelBtn = new JButton("Cancel");
 		cancelBtn.setBounds(146, 102, 89, 23);
 		loginMain.add(cancelBtn);
+		ActionListener cancelListen = new clearListener();
+		cancelBtn.addActionListener(cancelListen);
 		
 		JPanel loginInputs = new JPanel();
 		loginInputs.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -90,5 +101,35 @@ public class LoginUI {
 		passField = new JPasswordField();
 		passField.setBounds(74, 42, 138, 20);
 		loginInputs.add(passField);
+	}	
+	class loginListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String uName = usrField.getText();
+			String pWord = String.valueOf(passField.getPassword());
+			if (pWord.equals(pass)) {
+				if (uName.equals(tLog)) {
+					JFrame acWindow = new AccountantUI2();
+					acWindow.setVisible(true);
+					setVisible(false);
+				}
+				if (uName.equals(cLog)) {
+					JFrame coWindow = new CoachUI();
+					coWindow.setVisible(true);
+					setVisible(false);
+				}
+				if (uName.equals(mLog)) {
+					JFrame meWindow = new MemberUI();
+					meWindow.setVisible(true);
+					setVisible(false);
+				}
+			}
+		}
+	}
+
+	class clearListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			usrField.setText("");
+			passField.setText("");
+		}
 	}
 }
