@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Member implements Comparable<Member> {
+public class Member/* implements Comparable<Member>*/ {
 
 	private String userName;
 	private String password;
@@ -9,11 +9,11 @@ public class Member implements Comparable<Member> {
 	private String telephone;
 	private String email;
 	private String permission;
-	private int balance;
+	private Integer attendance;
 	private Integer paid;
 	private Integer notPaid;
 	private int consecDiscount;
-	private Integer attendance;
+	private int balance;
 
 	public Member(String userN, String pass, String lN, String fN, String tele, String email, String perm, int bal, Integer paid, Integer notPaid, int consec, Integer attend) {
 		setUserName(userN);
@@ -139,7 +139,7 @@ public class Member implements Comparable<Member> {
 	
 	
 	//payment status, attendance
-	
+/*	
 	public int compareTo(Member other) {
 		if ((getLastName() == other.getLastName())){
 			return (getFirstName().compareTo(other.getFirstName()));
@@ -159,10 +159,11 @@ public class Member implements Comparable<Member> {
 			return (firstMem.getNotPaid().compareTo(secondMem.getNotPaid()));
 		}
 	}
-	
-	class compAttendance implements Comparator<Member>{
+
+	public class compAttendance implements Comparator<Member>{
 		public int compare(Member firstMem, Member secondMem){
-			return (firstMem.getAttendance().compareTo(secondMem.getAttendance()));
+			return ((firstMem.getAttendance()).compareTo((secondMem.getAttendance())));
 		}
 	}
+	*/
 }
