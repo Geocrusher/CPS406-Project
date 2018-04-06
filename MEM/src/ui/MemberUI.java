@@ -22,6 +22,7 @@ public class MemberUI extends JFrame{
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTextArea memInboxText;
 
 	//private Jthis this;
 
@@ -125,7 +126,7 @@ public class MemberUI extends JFrame{
 		JScrollPane memInboxView = new JScrollPane();
 		memInbox.add(memInboxView, BorderLayout.CENTER);
 		
-		JTextArea memInboxText = new JTextArea();
+		memInboxText = new JTextArea();
 		memInboxText.setEditable(false);
 		memInboxView.setViewportView(memInboxText);
 		
