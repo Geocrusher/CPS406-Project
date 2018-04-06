@@ -90,7 +90,7 @@ public class MemberUI extends JFrame{
 		textField_1.setColumns(10);
 		
 		JLabel lblPayment = new JLabel("Payment:");
-		lblPayment.setBounds(229, 62, 46, 14);
+		lblPayment.setBounds(229, 62, 70, 14);
 		panel.add(lblPayment);
 		
 		JLabel lblDate = new JLabel("Date:");
