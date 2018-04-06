@@ -87,20 +87,20 @@ public class LoginUI extends JFrame{
 		loginInputs.setLayout(null);
 		
 		usrField = new JTextField();
-		usrField.setBounds(74, 11, 138, 20);
+		usrField.setBounds(91, 11, 121, 20);
 		loginInputs.add(usrField);
 		usrField.setColumns(10);
 		
 		JLabel usrLabel = new JLabel("Password:");
-		usrLabel.setBounds(10, 45, 61, 14);
+		usrLabel.setBounds(10, 45, 71, 14);
 		loginInputs.add(usrLabel);
 		
 		JLabel passLabel = new JLabel("Username:");
-		passLabel.setBounds(10, 14, 61, 14);
+		passLabel.setBounds(10, 14, 71, 14);
 		loginInputs.add(passLabel);
 		
 		passField = new JPasswordField();
-		passField.setBounds(74, 42, 138, 20);
+		passField.setBounds(91, 42, 121, 20);
 		loginInputs.add(passField);
 	}	
 	class loginListener implements ActionListener {

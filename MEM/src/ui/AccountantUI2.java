@@ -182,11 +182,11 @@ public class AccountantUI2 extends JFrame {
 		incomeExpenseViewer.setViewportView(incomeExpeneseText);
 		
 		JLabel lblRevenue = new JLabel("Revenue");
-		lblRevenue.setBounds(10, 42, 46, 14);
+		lblRevenue.setBounds(10, 42, 75, 14);
 		incomePanel.add(lblRevenue);
 		
 		JLabel lblExpenses = new JLabel("Expenses");
-		lblExpenses.setBounds(204, 40, 46, 14);
+		lblExpenses.setBounds(204, 40, 75, 14);
 		incomePanel.add(lblExpenses);
 		
 		JPanel coachManageTab = new JPanel();
