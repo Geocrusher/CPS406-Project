@@ -130,3 +130,38 @@ public class Methods {
 		return mem.getFirstName() + " " + mem.getLastName() + ": " + getBalance();
 	}
 }
+	
+
+	
+
+
+	class sendMsg implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			sendmsgtoMem(recipientText.getText(),messageText.getText());
+		}
+	}
+	public void sendmsgtoMem(String mem, String msg) {
+		for(Member x : membersList) {
+			if mem.equals(x.getFirstName() + " " + x.getLastName()){
+				writeToText(mem + "|" + msg, membersmsgs.txt);
+			}
+			else
+				messageText.setText("Member not found");
+		}
+	}
+	public void setMessage(String file, String mem) {
+		try {
+	        BufferedReader buffread = new BufferedReader(new FileReader(file));
+	        String line;
+	        while ((line = buffread.readLine()) != null){
+	        	String[] temp = line.split("|");
+	        	if(temp[0].equals(mem)) {
+	        		memInboxText.setText(temp[1], true);
+	        	}
+	        }
+	        buffread.close();
+	    } catch (IOException e) {
+	        System.out.println("Could not find file");
+	        return(""); //If the file cannot be found returns the empty string.
+	    }	
+	}
