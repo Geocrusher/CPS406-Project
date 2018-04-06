@@ -1,8 +1,11 @@
+package ui;
 import java.util.*;
 
 public class Methods {
 	
 	ArrayList<Member> membersList = new ArrayList<Member>();
+	private int totProfit;
+
 			
 	public void addMem(String userName, String password,  String lastName, String firstName, String tele, String email, String perm){
 		Member member = new Member(userName, password, lastName, firstName, tele, email, perm, 0, 0, 0, 0, 0);
@@ -99,5 +102,31 @@ public class Methods {
 		}
 		return null;
 	}
-	
+
+
+	public void totalProfit(Member mem){
+		for(Member x:membersList){
+			totProfit += x.getPaid();
+		}
+	}
+
+
+	public void topTen(){
+		for(int x=0;x<=9;x++){
+			membersList.get(i).payBalance(5);
+		}
+	}
+
+	public Member advancePayment(){
+		for(Member x : membersList){
+			if (x.getBalance<0){
+				return x;
+			}
+			return null;
+		}
+	}
+
+	public String toString(Member mem){
+		return mem.getFirstName() + " " + mem.getLastName() + ": " + getBalance();
+	}
 }
