@@ -1,8 +1,12 @@
+package ui;
 import java.util.*;
 
 public class Methods {
 	
 	ArrayList<Member> membersList = new ArrayList<Member>();
+	private int totProfit;
+//	private ArrayList<Expense>[] month = (ArrayList<Expense>[])new ArrayList[11];
+
 			
 	public void addMem(String userName, String password,  String lastName, String firstName, String tele, String email, String perm){
 		Member member = new Member(userName, password, lastName, firstName, tele, email, perm, 0, 0, 0, 0, 0);
@@ -99,5 +103,18 @@ public class Methods {
 		}
 		return null;
 	}
+
+
+	public void totalProfit(Member mem){
+		for(Member x:membersList){
+			totProfit += x.getPaid();
+		}
+	}
+
+	public void totalExpense(int mnth, String expnse){
+		month[]
+	}
+
+
 	
 }

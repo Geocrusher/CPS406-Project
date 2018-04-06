@@ -24,6 +24,7 @@ public class AccountantUI2 extends JFrame {
 	private JTextField expenseAmount;
 	private JTextField dueDate;
 	private JTable table;
+	
 
 	/**
 	 * Launch the application.

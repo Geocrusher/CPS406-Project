@@ -133,14 +133,19 @@ public class MemberUI extends JFrame{
 		toolBar.setFloatable(false);
 		getContentPane().add(toolBar, BorderLayout.NORTH);
 		
-		JButton btnNewButton = new JButton("Logout");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		toolBar.add(btnNewButton);
+		JButton btnLogout = new JButton("Logout");
+		toolBar.add(btnLogout);
+		ActionListener logoutListen = new logoutListener();
+		btnLogout.addActionListener(logoutListen);
 		
 		JButton btnNewButton_1 = new JButton("Shutdown");
 		toolBar.add(btnNewButton_1);
+	}
+	class logoutListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			JFrame loWindow = new LoginUI();
+			loWindow.setVisible(true);
+			setVisible(false);
+		}
 	}
 }
