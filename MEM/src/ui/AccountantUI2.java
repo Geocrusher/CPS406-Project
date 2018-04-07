@@ -1,5 +1,6 @@
 package ui;
 
+import java.util.*;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,11 +22,15 @@ import javax.swing.JTable;
 public class AccountantUI2 extends JFrame {
 
 	//private JFrame frame;
+	private JComboBox debtMonth;
+	private JTextArea debtMonthText;
+	private JComboBox expenseType;
 	private JTextField expenseAmount;
 	private JTextField dueDate;
 	private JTable table;
-	
-
+	private String[] monthArr = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+	private String[] typeArr = {"Coach","Hall"};
+	private ArrayList<Expense> expList = new ArrayList<Expense>();
 	/**
 	 * Launch the application.
 	 */
@@ -68,13 +73,6 @@ public class AccountantUI2 extends JFrame {
 		ActionListener logoutListen = new logoutListener();
 		btnLogout.addActionListener(logoutListen);
 		
-		JButton btnShutdown = new JButton("Shutdown");
-		btnShutdown.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		toolBar.add(btnShutdown);
-		
 		JTabbedPane accountTabs = new JTabbedPane(JTabbedPane.TOP);
 		this.getContentPane().add(accountTabs, BorderLayout.CENTER);
 		
@@ -88,7 +86,7 @@ public class AccountantUI2 extends JFrame {
 		financeTab.add(profitPanel);
 		profitPanel.setLayout(null);
 		
-		JComboBox profitMonth = new JComboBox();
+		JComboBox profitMonth = new JComboBox(monthArr);
 		profitMonth.setBounds(256, 11, 116, 22);
 		profitPanel.add(profitMonth);
 		
@@ -109,7 +107,7 @@ public class AccountantUI2 extends JFrame {
 		financeTab.add(debtLogPanel);
 		debtLogPanel.setLayout(null);
 		
-		JComboBox debtMonth = new JComboBox();
+		debtMonth = new JComboBox(monthArr);
 		debtMonth.setBounds(178, 11, 116, 22);
 		debtLogPanel.add(debtMonth);
 		
@@ -117,14 +115,14 @@ public class AccountantUI2 extends JFrame {
 		debtMonthViewer.setBounds(10, 44, 284, 218);
 		debtLogPanel.add(debtMonthViewer);
 		
-		JTextArea debtMonthText = new JTextArea();
+		debtMonthText = new JTextArea();
 		debtMonthViewer.setViewportView(debtMonthText);
 		
 		JLabel lblExpenseType = new JLabel("Expense Type:");
 		lblExpenseType.setBounds(20, 277, 88, 14);
 		debtLogPanel.add(lblExpenseType);
 		
-		JComboBox expenseType = new JComboBox();
+		expenseType = new JComboBox(typeArr);
 		expenseType.setBounds(118, 273, 176, 22);
 		debtLogPanel.add(expenseType);
 		
@@ -136,16 +134,20 @@ public class AccountantUI2 extends JFrame {
 		JButton cancelDebt = new JButton("Cancel");
 		cancelDebt.setBounds(217, 379, 77, 23);
 		debtLogPanel.add(cancelDebt);
+		ActionListener cancelListen = new clearListener();
+		cancelDebt.addActionListener(cancelListen);
 		
 		JButton submitDebt = new JButton("Submit");
 		submitDebt.setBounds(118, 379, 77, 23);
 		debtLogPanel.add(submitDebt);
+		ActionListener submitListen = new submitListener();
+		submitDebt.addActionListener(submitListen);
 		
-		JLabel lblDueDate = new JLabel("Due Date:");
+		JLabel lblDueDate = new JLabel("Due Date (DD):");
 		lblDueDate.setBounds(20, 344, 78, 14);
 		debtLogPanel.add(lblDueDate);
 		
-		JLabel lblAmount = new JLabel("Amount");
+		JLabel lblAmount = new JLabel("Amount ($):");
 		lblAmount.setBounds(20, 312, 78, 14);
 		debtLogPanel.add(lblAmount);
 		
@@ -160,7 +162,7 @@ public class AccountantUI2 extends JFrame {
 		financeTab.add(incomePanel);
 		incomePanel.setLayout(null);
 		
-		JComboBox incomeMonth = new JComboBox();
+		JComboBox incomeMonth = new JComboBox(monthArr);
 		incomeMonth.setBounds(256, 11, 116, 22);
 		incomePanel.add(incomeMonth);
 		
@@ -211,6 +213,7 @@ public class AccountantUI2 extends JFrame {
 		schedSubmit.setBounds(10, 37, 81, 23);
 		coachSchedControls.add(schedSubmit);
 		
+		
 		JButton schedCancel = new JButton("Cancel");
 		schedCancel.setBounds(10, 71, 81, 23);
 		coachSchedControls.add(schedCancel);
@@ -232,5 +235,65 @@ public class AccountantUI2 extends JFrame {
 			loWindow.setVisible(true);
 			setVisible(false);
 		}
+	}
+
+	class submitListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (!dueDate.getText().equals("") && !expenseAmount.getText().equals("")) {
+				int month = monthToInt((String) debtMonth.getSelectedItem());
+				System.out.println(month);
+				int prior = Integer.valueOf(dueDate.getText());
+				String type = (String) expenseType.getSelectedItem();
+				double amount = Double.valueOf(expenseAmount.getText());
+				Expense expensive = new Expense(month, prior, type, amount);
+				expList.add(expensive);
+				Collections.sort(expList);
+				debtMonthText.setText("");
+				for (Expense x : expList) {
+					debtMonthText.append(x.toString());
+				}
+				
+			}
+		}
+	}
+
+	class clearListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			dueDate.setText("");
+			expenseAmount.setText("");
+		}
+	}
+
+	public int monthToInt(String month) {
+		int num;
+		switch (month) {
+            case "January": num = 1;
+				break;
+			case "February": num = 2;
+				break;
+			case "March": num = 3;
+				break;
+			case "April": num = 4;
+				break;
+			case "May": num = 5;
+				break;
+			case "June": num = 6;
+				break;
+			case "July": num = 7;
+				break;
+			case "August": num = 8;
+				break;
+			case "September": num = 9;
+				break;
+			case "October": num = 10;
+				break;
+			case "November": num = 11;
+				break;
+			case "December": num = 12;
+				break;
+			default : num = -1;
+				break;
+		}
+        return num;
 	}
 }
