@@ -1,0 +1,403 @@
+package ui;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.TitledBorder;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class CoachUI2 extends JFrame {
+	private JTextField recipientText;
+	private JTextField txtFirst;
+	private JTextField txtLast;
+	private JTextField txtPhone;
+	private JTextField txtAddress;
+	private JTextArea messageText;
+	private ArrayList<Member> membersList = new ArrayList<Member>();
+	
+	
+	
+	/**
+	 * Launch the application.
+	 */
+	/*
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CoachUI window = new CoachUI();
+					window.this.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	*/
+	/**
+	 * Create the application.
+	 */
+	public CoachUI2() {
+		setResizable(false);
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		//this = new JFrame();
+		this.setTitle("Coach Manager");
+		this.setBounds(100, 100, 911, 727);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JToolBar toolBar = new JToolBar();
+		toolBar.setFloatable(false);
+		this.getContentPane().add(toolBar, BorderLayout.NORTH);
+		
+		JButton btnNewButton = new JButton("Shutdown");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		JButton btnShutdown = new JButton("Logout");
+		toolBar.add(btnShutdown);
+		toolBar.add(btnNewButton);
+		ActionListener logoutListen = new logoutListener();
+		btnShutdown.addActionListener(logoutListen);
+		
+		JTabbedPane coachTabs = new JTabbedPane(JTabbedPane.TOP);
+		this.getContentPane().add(coachTabs, BorderLayout.CENTER);
+		
+		JPanel coachMain = new JPanel();
+		coachTabs.addTab("Main", null, coachMain, null);
+		coachMain.setLayout(null);
+		
+		JScrollPane tableViewer = new JScrollPane();
+		tableViewer.setBounds(330, 11, 553, 609);
+		coachMain.add(tableViewer);
+		
+		JTextArea viewMemberListArea = new JTextArea();
+		viewMemberListArea.setEditable(false);
+		viewMemberListArea.setWrapStyleWord(true);
+		tableViewer.setViewportView(viewMemberListArea);
+		for (Member x: membersList){
+		viewMemberListArea.append(viewMem(x));
+		}
+		
+		JPanel sendMessages = new JPanel();
+		sendMessages.setBorder(new TitledBorder(null, "Send Messages", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		sendMessages.setBounds(10, 416, 310, 204);
+		coachMain.add(sendMessages);
+		sendMessages.setLayout(null);
+		
+		JScrollPane messagePane = new JScrollPane();
+		messagePane.setBounds(10, 50, 290, 106);
+		sendMessages.add(messagePane);
+		
+		messageText = new JTextArea();
+		messagePane.setViewportView(messageText);
+		
+		JLabel lblRecipient = new JLabel("Recipient:");
+		lblRecipient.setBounds(88, 25, 74, 14);
+		sendMessages.add(lblRecipient);
+		
+		recipientText = new JTextField();
+		recipientText.setBounds(172, 22, 128, 20);
+		sendMessages.add(recipientText);
+		recipientText.setColumns(10);
+		
+		JButton btnSendMesssage = new JButton("Send");
+		btnSendMesssage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sendmsgtoMemtxt(recipientText.getText(), messageText.getText());
+				recipientText.setText("");
+				
+			}
+		});
+		btnSendMesssage.setBounds(10, 167, 89, 23);
+		sendMessages.add(btnSendMesssage);
+		
+		JButton btnCancelMessage = new JButton("Cancel");
+		btnCancelMessage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				recipientText.setText("");
+				messageText.setText("");
+			}
+		});
+		btnCancelMessage.setBounds(109, 167, 89, 23);
+		sendMessages.add(btnCancelMessage);
+		
+		JPanel tableControls = new JPanel();
+		tableControls.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Controls", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		tableControls.setBounds(10, 12, 310, 394);
+		coachMain.add(tableControls);
+		tableControls.setLayout(null);
+		
+		JPanel addRemove = new JPanel();
+		addRemove.setBorder(new TitledBorder(null, "Add/Remove", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		addRemove.setBounds(10, 148, 290, 235);
+		tableControls.add(addRemove);
+		addRemove.setLayout(null);
+		
+		JLabel lblFirstName = new JLabel("First Name:");
+		lblFirstName.setBounds(10, 31, 97, 14);
+		addRemove.add(lblFirstName);
+		
+		JLabel lblLastName = new JLabel("Last Name:");
+		lblLastName.setBounds(10, 68, 97, 14);
+		addRemove.add(lblLastName);
+		
+		JLabel lblPhone = new JLabel("Phone:");
+		lblPhone.setBounds(10, 105, 97, 14);
+		addRemove.add(lblPhone);
+		
+		JLabel lblAddress = new JLabel("Address:");
+		lblAddress.setBounds(10, 142, 97, 14);
+		addRemove.add(lblAddress);
+		
+		txtFirst = new JTextField();
+		txtFirst.setBounds(117, 28, 163, 20);
+		addRemove.add(txtFirst);
+		txtFirst.setColumns(10);
+		
+		txtLast = new JTextField();
+		txtLast.setColumns(10);
+		txtLast.setBounds(117, 65, 163, 20);
+		addRemove.add(txtLast);
+		
+		txtPhone = new JTextField();
+		txtPhone.setColumns(10);
+		txtPhone.setBounds(117, 102, 163, 20);
+		addRemove.add(txtPhone);
+		
+		txtAddress = new JTextField();
+		txtAddress.setColumns(10);
+		txtAddress.setBounds(117, 139, 163, 20);
+		addRemove.add(txtAddress);
+		
+		
+		addMem("TL1", "TF1", "TEST", "ASD", 50, 3, 0, 1, 3);
+		addMem("TL2", "TF2", "TEST", "ASD", 0, 4, 0, 3, 2);
+		addMem("TL3", "TF3", "TEST", "ASD", -50, 0, 2, 1, 1);
+		for (Member x: membersList){
+			viewMemberListArea.append(viewMem(x));
+			}
+		
+		JButton btnAddMem = new JButton("Add");
+		btnAddMem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				addMem(txtLast.getText(), txtFirst.getText(), txtPhone.getText(), txtAddress.getText());
+				viewMemberListArea.setText("");
+				for (Member x: membersList){
+					viewMemberListArea.append(viewMem(x));
+					}
+			}
+		});
+		btnAddMem.setBounds(10, 170, 130, 23);
+		addRemove.add(btnAddMem);
+		
+		JButton btnRemoveMem = new JButton("Remove");
+		btnRemoveMem.setBounds(150, 170, 130, 23);
+		addRemove.add(btnRemoveMem);
+		
+		JButton btnCancelMem = new JButton("Cancel");
+		btnCancelMem.setBounds(10, 201, 270, 23);
+		addRemove.add(btnCancelMem);
+		
+		JButton btnSortFreq = new JButton("Sort via Frequency");
+		btnSortFreq.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				sortAttendance();
+				viewMemberListArea.setText("");
+				for (Member x: membersList){
+					viewMemberListArea.append(viewMem(x));
+					}
+			}
+		});
+		btnSortFreq.setBounds(10, 26, 290, 31);
+		tableControls.add(btnSortFreq);
+		
+		JButton btnSortPay = new JButton("Sort via Payment");
+		btnSortPay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sortPaid();
+				viewMemberListArea.setText("");
+				for (Member x: membersList){
+					viewMemberListArea.append(viewMem(x));
+					}
+			}
+		});
+		btnSortPay.setBounds(10, 60, 290, 31);
+		tableControls.add(btnSortPay);
+		
+		JButton btnApplyDiscountsfees = new JButton("Apply Discounts/Fees");
+		btnApplyDiscountsfees.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//do shit
+				multipleMissedPay(cycleMember());
+				consecDiscount(cycleMember());
+			}
+		});
+		btnApplyDiscountsfees.setBounds(10, 95, 290, 31);
+		tableControls.add(btnApplyDiscountsfees);
+		
+		JPanel coachInbox = new JPanel();
+		coachTabs.addTab("Inbox", null, coachInbox, null);
+		coachInbox.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane coachInboxViewer = new JScrollPane();
+		coachInbox.add(coachInboxViewer, BorderLayout.CENTER);
+		
+		JTextArea coachInboxText = new JTextArea();
+		coachInboxText.setEditable(false);
+		coachInboxViewer.setViewportView(coachInboxText);
+
+		
+	}
+	class logoutListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			JFrame loWindow = new LoginUI();
+			loWindow.setVisible(true);
+			setVisible(false);
+		}
+	}
+	
+	public String viewMem(Member x){
+		return x.getFirstName() + " " + x.getLastName() + " " + x.getBalance() + "\n";
+	}
+	
+	public Member cycleMember() {
+		for (Member x: membersList) {
+			return x;
+		}
+		return null;
+	}
+	//
+	public void addMem(String lastName, String firstName, String tele, String address){
+		Member member = new Member(lastName, firstName, tele, address, 0, 0, 0, 0, 0);
+		membersList.add(member);
+	}
+	public void addMem(String lastName, String firstName, String tele, String address, int bal, Integer paid, Integer notPaid, int consec, Integer attend){
+		Member member = new Member(lastName, firstName, tele, address, bal, paid, notPaid, consec, attend);
+		membersList.add(member);
+	}
+	
+	public void remMem(String lastName, String firstName){
+		membersList.remove(findMember(lastName, firstName));
+	}	
+	
+	public Member findMember(String lastName, String firstName){
+		for (Member x : membersList) {
+			if ((x.getLastName().equals(lastName))&&(x.getFirstName().equals(firstName)))
+				return x;
+		}
+		return null;
+	}
+	
+	public void sortAttendance(){
+		Collections.sort(membersList, new Comparator<Member>() {
+			public int compare(Member firstMem, Member secondMem){
+				return ((secondMem.getAttendance()).compareTo((firstMem.getAttendance())));
+			}
+		});
+	}
+	
+	public void sortPaid(){
+		Collections.sort(membersList, new Comparator<Member>() {
+			public int compare(Member firstMem, Member secondMem){
+				return firstMem.getPaid().compareTo(secondMem.getPaid());
+			}
+		});
+	}
+
+	public void sortNotPaid(){
+		Collections.sort(membersList, new Comparator<Member>() {
+			public int compare(Member firstMem, Member secondMem){
+				return (firstMem.getNotPaid().compareTo(secondMem.getNotPaid()));
+			}
+		});
+	}
+	
+	public void multipleMissedPay(Member mem){
+		if (mem.getNotPaid() != 0){
+			mem.addBalance(10);
+			//SEND MESSAGE TO PAY
+		}
+	}
+
+	public void consecDiscount(Member mem){
+		if (mem.getConsecDiscount() > 3){
+			mem.payBalance(5);
+			//SEND MESSAGE 10% OFF RECEIVED FOR NEXT CLASS PURCHASED
+		}
+	}
+
+	
+	public void sendmsgtoMemtxt(String mem, String msg) {
+		for(Member x : membersList) {
+			if (mem.equals(x.getFirstName() + " " + x.getLastName())){
+				writeToText(mem + "|" + msg+ "\n", "src/ui/membermsgs.txt");
+				messageText.setText("");
+				return;
+			}
+			else {
+				messageText.setText("Member not found");
+			}
+		}
+	}
+	
+	public static void writeToText(String str, String output) {
+	    try {
+	        FileWriter filewrite = new FileWriter(output, true);
+	        filewrite.write(str);
+	        filewrite.close();
+	    } catch (IOException e) {
+	        System.out.println("Error");
+	    }
+	}
+	
+	/*public void setMessage(String file, String mem) {
+		try {
+	        BufferedReader buffread = new BufferedReader(new FileReader(file));
+	        String line;
+	        while ((line = buffread.readLine()) != null){
+	        	String[] temp = line.split("|");
+	        	if(temp[0].equals(mem)) {
+	        		memInboxText.setText(temp[1], true);
+	        	}
+	        }
+	        buffread.close();
+	    } catch (IOException e) {
+	        System.out.println("Could not find file");
+	    }	
+	} */
+}
