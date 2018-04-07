@@ -123,6 +123,10 @@ public class LoginUI extends JFrame{
 					meWindow.setVisible(true);
 					setVisible(false);
 				}
+				else {
+					usrField.setText("Invalid Login/Password");
+					passField.setText("Press Cancel");
+				}
 			}
 		}
 	}

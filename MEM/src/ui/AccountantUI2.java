@@ -31,6 +31,9 @@ public class AccountantUI2 extends JFrame {
 	private String[] monthArr = {"January","February","March","April","May","June","July","August","September","October","November","December"};
 	private String[] typeArr = {"Coach","Hall"};
 	private ArrayList<Expense> expList = new ArrayList<Expense>();
+	private String[] yearArr = {"Profits for:","January: $111","February: $3050","March: $6972","April: $4500","May: $800","June: $1671","July: $1595","August: $5069","September: $1998","October: $1420","November: $600","December: $2525"};
+	private String[] expenseArr = {"Paid Coach: $300", "Paid Hall: $1000", "Refreshments: $40"};
+	private String[] incomeArr = {"Single Member paid for one class: $90", "Class of 23 paid for one class: $2070"};
 	/**
 	 * Launch the application.
 	 */
@@ -86,6 +89,7 @@ public class AccountantUI2 extends JFrame {
 		financeTab.add(profitPanel);
 		profitPanel.setLayout(null);
 		
+		/*
 		JComboBox profitMonth = new JComboBox(monthArr);
 		profitMonth.setBounds(256, 11, 116, 22);
 		profitPanel.add(profitMonth);
@@ -93,7 +97,7 @@ public class AccountantUI2 extends JFrame {
 		JLabel lblProfitMonth = new JLabel("Month:");
 		lblProfitMonth.setBounds(206, 15, 40, 14);
 		profitPanel.add(lblProfitMonth);
-		
+		*/
 		JScrollPane proftViewer = new JScrollPane();
 		proftViewer.setBounds(10, 44, 362, 121);
 		profitPanel.add(proftViewer);
@@ -143,11 +147,11 @@ public class AccountantUI2 extends JFrame {
 		ActionListener submitListen = new submitListener();
 		submitDebt.addActionListener(submitListen);
 		
-		JLabel lblDueDate = new JLabel("Due Date (DD):");
+		JLabel lblDueDate = new JLabel("Due Date(DD):");
 		lblDueDate.setBounds(20, 344, 78, 14);
 		debtLogPanel.add(lblDueDate);
 		
-		JLabel lblAmount = new JLabel("Amount ($):");
+		JLabel lblAmount = new JLabel("Amount($):");
 		lblAmount.setBounds(20, 312, 78, 14);
 		debtLogPanel.add(lblAmount);
 		
@@ -161,7 +165,7 @@ public class AccountantUI2 extends JFrame {
 		incomePanel.setBounds(10, 198, 382, 233);
 		financeTab.add(incomePanel);
 		incomePanel.setLayout(null);
-		
+		/*
 		JComboBox incomeMonth = new JComboBox(monthArr);
 		incomeMonth.setBounds(256, 11, 116, 22);
 		incomePanel.add(incomeMonth);
@@ -169,7 +173,7 @@ public class AccountantUI2 extends JFrame {
 		JLabel lblIncomeMonth = new JLabel("Month:");
 		lblIncomeMonth.setBounds(204, 15, 42, 14);
 		incomePanel.add(lblIncomeMonth);
-		
+		*/
 		JScrollPane incomeRevenueViewer = new JScrollPane();
 		incomeRevenueViewer.setBounds(10, 67, 168, 155);
 		incomePanel.add(incomeRevenueViewer);
@@ -241,7 +245,6 @@ public class AccountantUI2 extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if (!dueDate.getText().equals("") && !expenseAmount.getText().equals("")) {
 				int month = monthToInt((String) debtMonth.getSelectedItem());
-				System.out.println(month);
 				int prior = Integer.valueOf(dueDate.getText());
 				String type = (String) expenseType.getSelectedItem();
 				double amount = Double.valueOf(expenseAmount.getText());
@@ -249,9 +252,14 @@ public class AccountantUI2 extends JFrame {
 				expList.add(expensive);
 				Collections.sort(expList);
 				debtMonthText.setText("");
+				double total = 0;
 				for (Expense x : expList) {
-					debtMonthText.append(x.toString());
+					if (x.getMonth() == month) {
+						debtMonthText.append(x.toString());
+						total += x.getAmount();
+					}
 				}
+				debtMonthText.append("Total Debt for "+(String) debtMonth.getSelectedItem()+": $"+total);
 				
 			}
 		}
