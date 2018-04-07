@@ -114,12 +114,12 @@ public class LoginUI extends JFrame{
 					setVisible(false);
 				}
 				if (uName.equals(cLog)) {
-					JFrame coWindow = new CoachUI();
+					JFrame coWindow = new CoachUI2();
 					coWindow.setVisible(true);
 					setVisible(false);
 				}
 				if (uName.equals(mLog)) {
-					JFrame meWindow = new MemberUI();
+					JFrame meWindow = new MemberUI2();
 					meWindow.setVisible(true);
 					setVisible(false);
 				}

@@ -31,9 +31,9 @@ public class AccountantUI2 extends JFrame {
 	private String[] monthArr = {"January","February","March","April","May","June","July","August","September","October","November","December"};
 	private String[] typeArr = {"Coach","Hall"};
 	private ArrayList<Expense> expList = new ArrayList<Expense>();
-	private String[] yearArr = {"Profits for:","January: $111","February: $3050","March: $6972","April: $4500","May: $800","June: $1671","July: $1595","August: $5069","September: $1998","October: $1420","November: $600","December: $2525"};
-	private String[] expenseArr = {"Paid Coach: $300", "Paid Hall: $1000", "Refreshments: $40"};
-	private String[] incomeArr = {"Single Member paid for one class: $90", "Class of 23 paid for one class: $2070"};
+	private String[] yearArr = {"Profits for: \n","January: $111 \n","February: $3050 \n","March: $6972 \n","April: $4500 \n","May: $800 \n","June: $1671 \n","July: $1595 \n","August: $5069 \n","September: $1998 \n","October: $1420 \n","November: $600 \n","December: $2525"};
+	private String[] expenseArr = {"Paid Coach: $300 \n", "Paid Hall: $1000 \n", "Refreshments: $40"};
+	private String[] incomeArr = {"Single Member paid for class: $90 \n", "Class of 23 paid for class: $2070"};
 	/**
 	 * Launch the application.
 	 */
@@ -104,6 +104,9 @@ public class AccountantUI2 extends JFrame {
 		
 		JTextArea profitText = new JTextArea();
 		proftViewer.setViewportView(profitText);
+		for (String x : yearArr) {
+			profitText.append(x);
+		}
 		
 		JPanel debtLogPanel = new JPanel();
 		debtLogPanel.setBorder(new TitledBorder(null, "Debt Log", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -180,6 +183,9 @@ public class AccountantUI2 extends JFrame {
 		
 		JTextArea incomeRevenueText = new JTextArea();
 		incomeRevenueViewer.setViewportView(incomeRevenueText);
+		for (String x : incomeArr) {
+			incomeRevenueText.append(x);
+		}
 		
 		JScrollPane incomeExpenseViewer = new JScrollPane();
 		incomeExpenseViewer.setBounds(204, 67, 168, 155);
@@ -187,6 +193,9 @@ public class AccountantUI2 extends JFrame {
 		
 		JTextArea incomeExpeneseText = new JTextArea();
 		incomeExpenseViewer.setViewportView(incomeExpeneseText);
+		for (String x : expenseArr) {
+			incomeExpeneseText.append(x);
+		}
 		
 		JLabel lblRevenue = new JLabel("Revenue");
 		lblRevenue.setBounds(10, 42, 75, 14);
