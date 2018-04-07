@@ -128,6 +128,10 @@ public class LoginUI extends JFrame{
 					passField.setText("Press Cancel");
 				}
 			}
+			else {
+				usrField.setText("Invalid Login/Password");
+				passField.setText("Press Cancel");
+			}
 		}
 	}
 
