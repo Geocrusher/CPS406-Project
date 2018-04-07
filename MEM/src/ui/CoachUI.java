@@ -233,5 +233,5 @@ public class CoachUI extends JFrame {
 				messageText.setText("Member not found");
 		}
 	}
-}
+
 }
