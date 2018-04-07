@@ -4,13 +4,10 @@ import java.util.*;
 
 public class Member/* implements Comparable<Member>*/ {
 
-	private String userName;
-	private String password;
 	private String lastName;
 	private String firstName;
 	private String telephone;
-	private String email;
-	private String permission;
+	private String address;
 	private Integer attendance;
 	private Integer paid;
 	private Integer notPaid;
@@ -18,14 +15,11 @@ public class Member/* implements Comparable<Member>*/ {
 	private int balance;
 	private ArrayList<String> classesAttended = new ArrayList<String>();
 
-	public Member(String userN, String pass, String lN, String fN, String tele, String email, String perm, int bal, Integer paid, Integer notPaid, int consec, Integer attend) {
-		setUserName(userN);
-		setPassword(pass);
+	public Member(String lN, String fN, String tele, String address, int bal, Integer paid, Integer notPaid, int consec, Integer attend) {
 		setLastName(lN);
 		setFirstName(fN);
 		setTelephone(tele);
-		setEmail(email);
-		setPermission(perm);
+		setAddress(address);
 		setBalance(bal);
 		setPaid(paid);
 		setNotPaid(notPaid);
@@ -33,9 +27,6 @@ public class Member/* implements Comparable<Member>*/ {
 		setAttendance(attend);
 	}
 
-	public void setUserName(String userN) {
-		userName = userN;
-	}
 
 	public void setLastName(String lName) {
 		lastName = lName;
@@ -49,12 +40,8 @@ public class Member/* implements Comparable<Member>*/ {
 		telephone = tele;
 	}
 
-	public void setEmail(String em) {
-		email = em;
-	}
-	
-	public void setPassword(String pass) {
-		password = pass;
+	public void setAddress(String ad) {
+		address = ad;
 	}
 	
 	public void setBalance(int bal) {
@@ -69,9 +56,6 @@ public class Member/* implements Comparable<Member>*/ {
 		balance -= bal;
 	}
 	
-	public void setPermission(String perm) {
-		permission = perm;
-	}
 	
 	public void setPaid(Integer pay) {
 		paid = pay;
@@ -98,10 +82,6 @@ public class Member/* implements Comparable<Member>*/ {
 	}
 	
 	
-	public String getUserName() {
-		return userName;
-	}
-	
 	public String getLastName() {
 		return lastName;
 	}
@@ -114,20 +94,12 @@ public class Member/* implements Comparable<Member>*/ {
 		return telephone;
 	}
 	
-	public String getEmail() {
-		return email;
-	}
-
-	public String getPassword() {
-		return password;
+	public String getAddress() {
+		return address;
 	}
 	
 	public int getBalance() {
 		return balance;
-	}
-	
-	public String getPermission() {
-		return permission;
 	}
 	
 	public Integer getPaid() {
