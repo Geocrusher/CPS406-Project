@@ -1,5 +1,11 @@
 # CPS406-Project
 
+
+INSTRUCTIONS
+------------
+Compile and run main.java
+Login with either: tra
+
 CONTENTS OF THIS FILE
 ---------------------
 
@@ -75,3 +81,4 @@ to the current members in the club. The treasurer can schedule coaches and view 
 of members. Coaches are able to view the list of members as well. Members are automatically
 charged for missed payments, and members with good attendance will be elligible to get 
 a discount. The treasurer has access to all finances.
+
