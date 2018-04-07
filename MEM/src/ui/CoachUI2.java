@@ -82,15 +82,8 @@ public class CoachUI2 extends JFrame {
 		toolBar.setFloatable(false);
 		this.getContentPane().add(toolBar, BorderLayout.NORTH);
 		
-		JButton btnNewButton = new JButton("Shutdown");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
 		JButton btnShutdown = new JButton("Logout");
 		toolBar.add(btnShutdown);
-		toolBar.add(btnNewButton);
 		ActionListener logoutListen = new logoutListener();
 		btnShutdown.addActionListener(logoutListen);
 		
@@ -204,10 +197,19 @@ public class CoachUI2 extends JFrame {
 		txtAddress.setBounds(117, 139, 163, 20);
 		addRemove.add(txtAddress);
 		
-		
-		addMem("TL1", "TF1", "TEST", "ASD", 50, 3, 0, 1, 3);
-		addMem("TL2", "TF2", "TEST", "ASD", 0, 4, 0, 3, 2);
-		addMem("TL3", "TF3", "TEST", "ASD", -50, 0, 2, 1, 1);
+		//lastName,firstName,tele, address, bal,  paid, notPaid, consec, attend
+		addMem("LN1", "FN1", "PHONE1", "ADDRESS1", 90, 3, 1, 1, 3);
+		addMem("LN2", "FN2", "PHONE2", "ADDRESS2", 0, 4, 0, 3, 2);
+		addMem("LN3", "FN3", "PHONE3", "ADDRESS3", -90, 5, 0, 1, 1);
+		addMem("LN4", "FN4", "PHONE4", "ADDRESS4", 0, 3, 0, 1, 1);
+		addMem("LN5", "FN5", "PHONE5", "ADDRESS5", 90, 4, 1, 1, 1);
+		addMem("LN6", "FN6", "PHONE6", "ADDRESS6", -180, 7, 0, 2, 1);
+		addMem("LN7", "FN7", "PHONE7", "ADDRESS7", 0, 2, 0, 1, 1);
+		addMem("LN8", "FN8", "PHONE8", "ADDRESS8", 0, 1, 0, 2, 1);
+		addMem("LN9", "FN9", "PHONE9", "ADDRESS9", 0, 4, 0, 1, 1);
+		addMem("LN10", "FN10", "PHONE10", "ADDRESS10", 0, 1, 0, 1, 1);
+		addMem("LN11", "FN11", "PHONE11", "ADDRESS11", 0, 2, 0, 1, 1);
+		addMem("LN12", "FN12", "PHONE12", "ADDRESS12", 0, 3, 0, 1, 1);
 		for (Member x: membersList){
 			viewMemberListArea.append(viewMem(x));
 			}
@@ -226,10 +228,27 @@ public class CoachUI2 extends JFrame {
 		addRemove.add(btnAddMem);
 		
 		JButton btnRemoveMem = new JButton("Remove");
+		btnRemoveMem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				remMem(txtLast.getText(), txtFirst.getText());
+				viewMemberListArea.setText("");
+				for (Member x: membersList){
+					viewMemberListArea.append(viewMem(x));
+					}
+			}
+		});
 		btnRemoveMem.setBounds(150, 170, 130, 23);
 		addRemove.add(btnRemoveMem);
 		
 		JButton btnCancelMem = new JButton("Cancel");
+		btnCancelMem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtLast.setText("");
+				txtFirst.setText("");
+				txtPhone.setText("");
+				txtAddress.setText("");
+			}
+		});
 		btnCancelMem.setBounds(10, 201, 270, 23);
 		addRemove.add(btnCancelMem);
 		
@@ -263,8 +282,16 @@ public class CoachUI2 extends JFrame {
 		btnApplyDiscountsfees.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//do shit
-				multipleMissedPay(cycleMember());
-				consecDiscount(cycleMember());
+				sortAttendance();
+				for(Member x: membersList) {
+				multipleMissedPay(x);
+				consecDiscount(x);
+				}
+				topTen();
+				viewMemberListArea.setText("");
+				for (Member x: membersList){
+					viewMemberListArea.append(viewMem(x));
+				}
 			}
 		});
 		btnApplyDiscountsfees.setBounds(10, 95, 290, 31);
@@ -292,15 +319,10 @@ public class CoachUI2 extends JFrame {
 	}
 	
 	public String viewMem(Member x){
-		return x.getFirstName() + " " + x.getLastName() + " " + x.getBalance() + "\n";
+		return x.getFirstName() + " " + x.getLastName() + " " + x.getTelephone() + " " + x.getAddress() + " bal: " + x.getBalance() + " Times Paid: " + x.getPaid() + " Missed Payments: " + x.getNotPaid() + "\n";
 	}
 	
-	public Member cycleMember() {
-		for (Member x: membersList) {
-			return x;
-		}
-		return null;
-	}
+
 	//
 	public void addMem(String lastName, String firstName, String tele, String address){
 		Member member = new Member(lastName, firstName, tele, address, 0, 0, 0, 0, 0);
@@ -348,14 +370,14 @@ public class CoachUI2 extends JFrame {
 	}
 	
 	public void multipleMissedPay(Member mem){
-		if (mem.getNotPaid() != 0){
+		if (mem.getNotPaid() > 1){
 			mem.addBalance(10);
 			//SEND MESSAGE TO PAY
 		}
 	}
 
 	public void consecDiscount(Member mem){
-		if (mem.getConsecDiscount() > 3){
+		if (mem.getConsecDiscount() >= 3){
 			mem.payBalance(5);
 			//SEND MESSAGE 10% OFF RECEIVED FOR NEXT CLASS PURCHASED
 		}
@@ -375,6 +397,12 @@ public class CoachUI2 extends JFrame {
 		}
 	}
 	
+	public void topTen(){
+		for(int x=0;x<=9;x++){
+			membersList.get(x).payBalance(5);
+		}
+	}
+	
 	public static void writeToText(String str, String output) {
 	    try {
 	        FileWriter filewrite = new FileWriter(output, true);
@@ -384,20 +412,4 @@ public class CoachUI2 extends JFrame {
 	        System.out.println("Error");
 	    }
 	}
-	
-	/*public void setMessage(String file, String mem) {
-		try {
-	        BufferedReader buffread = new BufferedReader(new FileReader(file));
-	        String line;
-	        while ((line = buffread.readLine()) != null){
-	        	String[] temp = line.split("|");
-	        	if(temp[0].equals(mem)) {
-	        		memInboxText.setText(temp[1], true);
-	        	}
-	        }
-	        buffread.close();
-	    } catch (IOException e) {
-	        System.out.println("Could not find file");
-	    }	
-	} */
 }
