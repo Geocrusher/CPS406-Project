@@ -22,6 +22,7 @@ public class MemberUI extends JFrame{
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTextArea memInboxText;
 
 	//private Jthis this;
 
@@ -90,7 +91,7 @@ public class MemberUI extends JFrame{
 		textField_1.setColumns(10);
 		
 		JLabel lblPayment = new JLabel("Payment:");
-		lblPayment.setBounds(229, 62, 46, 14);
+		lblPayment.setBounds(229, 62, 70, 14);
 		panel.add(lblPayment);
 		
 		JLabel lblDate = new JLabel("Date:");
@@ -125,7 +126,7 @@ public class MemberUI extends JFrame{
 		JScrollPane memInboxView = new JScrollPane();
 		memInbox.add(memInboxView, BorderLayout.CENTER);
 		
-		JTextArea memInboxText = new JTextArea();
+		memInboxText = new JTextArea();
 		memInboxText.setEditable(false);
 		memInboxView.setViewportView(memInboxText);
 		
@@ -147,5 +148,19 @@ public class MemberUI extends JFrame{
 			loWindow.setVisible(true);
 			setVisible(false);
 		}
+	}
+	
+	public void setMessage(String file) {
+		try {
+	        	BufferedReader buffread = new BufferedReader(new FileReader(file));
+	        	String line = in.readLine();
+	        	while(line != null){
+	        		text.append(line + "\n");
+	          		line = in.readLine();
+	       		}
+		}
+	      	catch (IOException e) {
+	        System.out.println("Could not find file");
+	    }	
 	}
 }

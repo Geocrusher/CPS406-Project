@@ -120,6 +120,8 @@ public class CoachUI extends JFrame {
 		JButton btnSendMesssage = new JButton("Send");
 		btnSendMesssage.setBounds(10, 167, 89, 23);
 		sendMessages.add(btnSendMesssage);
+		ActionListener sendListen = new sendMsgListener();
+		btnSendMessage.addActionListener(sendListen);
 		
 		JButton btnCancelMessage = new JButton("Cancel");
 		btnCancelMessage.setBounds(109, 167, 89, 23);
@@ -215,4 +217,21 @@ public class CoachUI extends JFrame {
 			setVisible(false);
 		}
 	}
+	
+	class sendMsgListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			sendmsgtoMemtxt(recipientText.getText(),messageText.getText());
+		}
+	}
+	
+	public void sendmsgtoMemtxt(String mem, String msg) {
+		for(Member x : membersList) {
+			if (mem.equals(x.getFirstName() + " " + x.getLastName())){
+				writeToText(mem + "|" + msg, membersmsgs.txt + "\n");
+			}
+			else
+				messageText.setText("Member not found");
+		}
+	}
+
 }
