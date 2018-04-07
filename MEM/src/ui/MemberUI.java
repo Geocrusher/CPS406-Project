@@ -149,4 +149,18 @@ public class MemberUI extends JFrame{
 			setVisible(false);
 		}
 	}
+	
+	public void setMessage(String file) {
+		try {
+	        	BufferedReader buffread = new BufferedReader(new FileReader(file));
+	        	String line = in.readLine();
+	        	while(line != null){
+	        		text.append(line + "\n");
+	          		line = in.readLine();
+	       		}
+		}
+	      	catch (IOException e) {
+	        System.out.println("Could not find file");
+	    }	
+	}
 }
