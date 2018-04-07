@@ -4,7 +4,28 @@
 INSTRUCTIONS
 ------------
 Compile and run main.java
-Login with either: tra
+Login as 'treasurer', 'coach', or 'member' with the password: 'password'. Press cancel to clear the fields.
+Each username will open its respective mode.
+Logout will return to the login screen for switching between modes.
+
+Treasurer mode:
+Select a month from the dropdown in Debt Log.
+Select an expense type.
+Enter an amount of money (decimals are allowed).
+Enter the due date of the expense for the selected month.
+Press submit to log the expense and view the total debt for the selected month.
+The cancel button will clear the text fields.
+
+Coach mode:
+View registered members on the right hand side with the format: FIRSTNAME, LASTNAME, PHONENUMBER, ADDRESS, BALANCE, TIMES PAID/NOTPAID
+With provided test list you can sort members via frequency and times they paid/not paid
+You can apply respective discounts and fees to each member based on the times the paid/not paid and if they paid consecutively
+You can add members by entering the fields in add/remove section
+By typing in the members first and last name, you can remove them from the registered members list
+By typing in the recipient's first and last name, you can send them messages that will be stored in "membersmsgs.txt"
+Coach's Inbox tab is only UI component currently.
+
+Member mode only has a UI component.
 
 CONTENTS OF THIS FILE
 ---------------------
